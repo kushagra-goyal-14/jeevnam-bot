@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Jivanam Chat Systems</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/chatbot.css') }}">
+</head>
+<body>
+  <header class="container">
+    <h1>Jivanam Chat Systems</h1>
+    <p>Shared live chat and a Rasa health chatbot.</p>
+    <p>This preserves a student-project chatbot. Its responses are not medical advice.</p>
+  </header>
+  {% block body %}{% endblock %}
+  {% include 'chatbot_widget.html' %}
+</body>
+</html>

@@ -1,0 +1,52 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/chatroom.css')}}">
+<div class="image-div">
+  CHAT ROOM
+</div>
+<div class="chat-container">
+    <h3 class="empty-chat" style="color: #666;">No messages yet.</h3>
+    <br/>
+    <div class="message_holder"></div>
+    <br/>
+    <form class="input-bar" action="" method="POST">
+      <input type="text" class="username form-control" placeholder="Your name" maxlength="80" required/>
+      <input type="text" class="message form-control" placeholder="Message" maxlength="2000" required/>
+      <input type="submit" class="btn btn-outline-dark"/>
+    </form>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.min.js"></script>
+<script type="text/javascript">
+var socket = io();
+
+$('.input-bar').on('submit', function(e) {
+  e.preventDefault();
+  socket.emit('my event', {
+    user_name: $('input.username').val(),
+    message: $('input.message').val()
+  });
+  $('input.message').val('').focus();
+});
+socket.on( 'my response', function( msg ) {
+  
+  if( typeof msg.user_name !== 'undefined' ) {
+    $( '.empty-chat' ).remove()
+    $('div.message_holder').append($('<p>').text(msg.user_name + ': ' + msg.message))
+  }
+})
+</script>
+
+{% endblock %}
